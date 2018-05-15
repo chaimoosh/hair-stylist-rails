@@ -1,0 +1,6 @@
+<% @services.each do |service| %>
+  <%= service.name %> <br>
+  <%= service.price %> <br>
+  <%= link_to service.name, service_path(service) %> <br>
+  <%= link_to "Create New Service", new_service_path %>
+<% end %>

@@ -1,0 +1,5 @@
+
+<%= @appointment.time %> <br>
+<%= @appointment.user_name %> <br>
+<%= @appointment.service_name %> $<%= @appointment.service_price %> <br>
+<%= link_to 'Delete', appointment_path(@appointment), data: { confirm: 'Are you sure?' }, method: :delete %>

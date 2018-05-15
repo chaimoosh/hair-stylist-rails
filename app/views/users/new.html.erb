@@ -1,0 +1,12 @@
+<h2>Login or Signup</h2>
+  <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %> <br>
+<%= form_for @user do |f| %>
+  <%= f.label :username %>
+  <%= f.text_field :username %> <br>
+  <%= f.label :name %>
+  <%= f.text_field :name %> <br>
+  <%= f.label :password %>
+  <%= f.password_field :password %> <br>
+  <%= f.check_box :admin %>
+  <%= f.submit %>
+<% end %>

@@ -1,0 +1,6 @@
+<% @appointments.each do |appt| %>
+  <%= appt.time %> <br>
+  <%= appt.user_name %>
+  <%= link_to appt.service_name, appointment_path(appt) %> $<%= appt.service_price %>
+
+<% end %>

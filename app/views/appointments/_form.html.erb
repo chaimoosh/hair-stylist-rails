@@ -1,0 +1,20 @@
+<% if @appointment.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@appointment.errors.count, "error") %>
+      prohibited this post from being saved:
+    </h2>
+
+    <ul>
+    <% @appointment.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+<%= form_for @appointment do |f| %>
+  <%= f.datetime_select :time %> <br>
+  <%= f.hidden_field :user_id %>
+  <%= collection_radio_buttons(:appointment, :service_id, Service.all, :id, :name) %> <br>
+  <%= f.submit %>
+<% end %>
