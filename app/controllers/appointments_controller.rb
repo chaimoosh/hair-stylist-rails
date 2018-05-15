@@ -1,4 +1,5 @@
 class AppointmentsController < ApplicationController
+  before_action :require_login
   def index
     @appointments = Appointment.all
   end

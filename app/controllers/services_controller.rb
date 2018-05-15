@@ -1,4 +1,5 @@
 class ServicesController < ApplicationController
+  before_action :admin
   def index
     @services = Service.all
   end
