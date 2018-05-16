@@ -1,0 +1,9 @@
+<%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %> <br>
+
+<form action="/login" method="post">
+  <input type="text" name="username" placeholder="Username:"><br>
+  <input type="password" name="password" placeholder="Password:"><br>
+  <%= csrf_meta_tags %>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <button type="submit" name="submit">Login</button>
+</form>
