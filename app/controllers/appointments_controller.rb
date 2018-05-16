@@ -1,7 +1,12 @@
 class AppointmentsController < ApplicationController
   before_action :require_login
   def index
-    @appointments = Appointment.all
+    @user = User.find_by(id: session[:user_id])
+    if @user.admin == true
+      @appointments = Appointment.all
+    else
+      @appointments = @user.appointments
+    end
   end
 
   def new
@@ -12,7 +17,6 @@ class AppointmentsController < ApplicationController
     @appointment = Appointment.new(appointment_params)
     @appointment.user = User.find_by(id: session[:user_id])
     if @appointment.save
-      binding.pry
       redirect_to appointment_path(@appointment)
     else
       render :new
@@ -24,7 +28,12 @@ class AppointmentsController < ApplicationController
   end
 
   def edit
+    @user = User.find_by(id: session[:user_id])
     @appointment = Appointment.find_by(id: params[:id])
+    if @user.admin == false && @appointment.user_id != @user.id
+      flash[:notice] = "You don't have access to that page"
+      redirect_to appointments_path
+    end
   end
 
   def update
