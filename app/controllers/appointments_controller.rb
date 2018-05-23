@@ -51,7 +51,9 @@ class AppointmentsController < ApplicationController
     redirect_to appointments_path
   end
 
-
+  def overdue_appointments
+    @appointments = Appointment.overdue_appointments
+  end
   private
 
   def appointment_params

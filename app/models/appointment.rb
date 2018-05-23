@@ -16,4 +16,16 @@ class Appointment < ApplicationRecord
     service = Service.find_by(id: self.service_id)
     service.price
   end
+
+  def self.overdue_appointments
+    t = []
+    self.all.each do |appt|
+      if appt.time < Time.now
+        t << appt
+      end
+    end
+    t
+  end
+
+
 end
