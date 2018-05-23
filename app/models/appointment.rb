@@ -1,7 +1,7 @@
 class Appointment < ApplicationRecord
   belongs_to :user
   belongs_to :service
-
+  scope :overdue_appointments, ->(time) { where("time < ?", time) }
   def user_name
     user = User.find_by(id: self.user_id)
     user.name
@@ -17,15 +17,12 @@ class Appointment < ApplicationRecord
     service.price
   end
 
-  def self.overdue_appointments
-    t = []
-    self.all.each do |appt|
-      if appt.time < Time.now
-        t << appt
-      end
-    end
-    t
-  end
-
-
+  #def self.overdue_appointments
+  #  t = []
+  #  self.all.each do |appt|
+  #    if appt.time < Time.now
+  #      t << appt
+  #    end
+  #  end
+    
 end

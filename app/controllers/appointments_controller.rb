@@ -52,7 +52,7 @@ class AppointmentsController < ApplicationController
   end
 
   def overdue_appointments
-    @appointments = Appointment.overdue_appointments
+    @appointments = Appointment.overdue_appointments(Time.now)
   end
   private
 
