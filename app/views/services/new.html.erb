@@ -1,2 +1,21 @@
 <h3>Create A New Service</h3>
 <%= render partial: 'form', locals: {service: @service} %>
+
+<div id="serviceResult">
+  <p id="serviceName"></p>
+  <p id="servicePrice"></p>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+  $(function(){
+    $('form').submit(function(event){
+      event.preventDefault()
+      var values = $(this).serialize()
+      var posting = $.post('/services', values)
+      posting.done(function(data){
+        $("#serviceName").text(data["name"])
+        $("servicePrice").text(data["price"])
+      })
+    })
+  })
+</script>
