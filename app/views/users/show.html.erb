@@ -1,2 +1,10 @@
 <h3>Welcome <%= @user.name %></h3>
 <%= link_to "Book Appointment", new_user_appointment_path(@user) %>
+<br>
+<button onclick="getAppt()">View Appointments</button>
+
+<script type="text/javascript" charset="utf-8">
+  function getAppt(){
+    $.get("/appointments.json")
+  }
+</script>
