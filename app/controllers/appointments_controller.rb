@@ -4,8 +4,16 @@ class AppointmentsController < ApplicationController
     @user = User.find_by(id: session[:user_id])
     if @user.admin == true
       @appointments = Appointment.all
+      respond_to do |format|
+        format.html { render :index }
+        format.json { render json: @appointments }
+      end
     else
       @appointments = @user.appointments
+      respond_to do |format|
+        format.html { render :index }
+        format.json { render json: @appointments }
+      end
     end
   end
 
