@@ -11,12 +11,21 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
 <script type="text/javascript" charset="utf-8">
-
+class dateTime {
+  constructor (time) {
+    this.time = time
+  }
+  function formatTime(){
+    console.log(this.time)
+  }
+}
 $(document).ready(function () {
   $("#getAppt").on("click", function(){getAppt()})
   var getAppt = function (){
     $.get("/appointments.json", function(data){
       data.forEach(function(thing){
+          let now = new dateTime(thing["time"])
+          now.formatTime()
           $("#appointmentTime").append(`<li>${thing["time"]}</li>`)
         })
     })
