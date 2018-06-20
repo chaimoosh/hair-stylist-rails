@@ -15,18 +15,26 @@ class dateTime {
   constructor (time) {
     this.time = time
   }
-  function formatTime(){
-    console.log(this.time)
+  formatTime(){
+    var timeArray = this.time.split("-")
+    var year = timeArray[0]
+    var month = timeArray[1]
+    var endString = timeArray[2]
+    var day = endString.slice(0,2)
+    var time = endString.slice(3,8)
+    //debugger
+
+    return (`${month} ${day} ${year} at ${time}`)
   }
 }
+
 $(document).ready(function () {
   $("#getAppt").on("click", function(){getAppt()})
   var getAppt = function (){
     $.get("/appointments.json", function(data){
       data.forEach(function(thing){
           let now = new dateTime(thing["time"])
-          now.formatTime()
-          $("#appointmentTime").append(`<li>${thing["time"]}</li>`)
+          $("#appointmentTime").append(`<li>${now.formatTime()}</li>`)
         })
     })
   }
