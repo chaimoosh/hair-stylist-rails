@@ -16,7 +16,9 @@ $(document).ready(function () {
   $("#getAppt").on("click", function(){getAppt()})
   var getAppt = function (){
     $.get("/appointments.json", function(data){
-      console.log(data)
+      data.forEach(function(thing){
+          $("#appointmentTime").text(`<li>${thing["time"]}</li>`)
+        })
     })
   }
 });

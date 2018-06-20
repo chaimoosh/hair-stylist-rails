@@ -12,7 +12,7 @@ class AppointmentsController < ApplicationController
       @appointments = @user.appointments
       respond_to do |format|
         format.html { render :index }
-        format.json { render json: @appointments }
+        format.json { render json: @appointments}
       end
     end
   end
