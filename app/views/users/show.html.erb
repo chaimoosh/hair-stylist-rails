@@ -1,10 +1,23 @@
 <h3>Welcome <%= @user.name %></h3>
 <%= link_to "Book Appointment", new_user_appointment_path(@user) %>
 <br>
-<button onclick="getAppt()">View Appointments</button>
+<button id="getAppt">View Appointments</button>
+
+<div id="appointments">
+  <ul id="appointmentTime">
+
+  </ul>
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
 <script type="text/javascript" charset="utf-8">
-  function getAppt(){
-    $.get("/appointments.json")
+
+$(document).ready(function () {
+  $("#getAppt").on("click", function(){getAppt()})
+  var getAppt = function (){
+    $.get("/appointments.json", function(data){
+      console.log(data)
+    })
   }
+});
 </script>
