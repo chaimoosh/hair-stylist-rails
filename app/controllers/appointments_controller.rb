@@ -33,6 +33,10 @@ class AppointmentsController < ApplicationController
 
   def show
     @appointment = Appointment.find_by(id: params[:id])
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @appointment.to_json(include: :service)}
+    end
   end
 
   def edit
