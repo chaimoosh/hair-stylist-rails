@@ -10,13 +10,17 @@ class UsersController < ApplicationController
       redirect_to user_path(@user)
     else
       render :new
-    end 
+    end
   end
 
   def show
     @user = User.find_by(id: params[:id])
     if session[:user_id] != @user.id && @user.admin == false
       redirect_to '/'
+    end
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @user.to_json(include: :appointments)}
     end
   end
 

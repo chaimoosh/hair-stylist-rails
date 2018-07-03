@@ -16,9 +16,7 @@
 //= require jquery
 //= require_tree .
 //= require service
-$(window).load(function(){
 
-})
 $(document).ready(function () {
 
 class dateTime {
@@ -40,15 +38,18 @@ class dateTime {
 
   $("#getApptList").on("click", getApptList)
   function getApptList(){
-    $.get("/appointments.json", function(data){
-      data.forEach(function(thing){
+    var sessionValue = $("#hdnSession").data('value');
+    $.get(`/users/${sessionValue}.json`, function(data) {
+      data["appointments"].forEach(function(thing){
           let now = new dateTime(thing["time"])
           let apptId = thing["id"]
           $("#appointmentTime").append(`<li>${now.formatTime()} <button id="getAppt" data-id="${apptId}" >View Appointment</button></li>`)
-
         })
     })
   }
+
+
+
   //implelent addEvetnListener on all the appointments
 
     $("#appointmentTime").on("click", "#getAppt",function() {
@@ -63,7 +64,13 @@ class dateTime {
       })
     })
 
-
+    // $.get("/appointments.json", function(data){
+    //   data.forEach(function(thing){
+    //       let now = new dateTime(thing["time"])
+    //       let apptId = thing["id"]
+    //       $("#appointmentTime").append(`<li>${now.formatTime()} <button id="getAppt" data-id="${apptId}" >View Appointment</button></li>`)
+    //
+    //     })
 
 
   // getAppt)
